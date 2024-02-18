@@ -2,13 +2,14 @@ import torch
 
 
 @torch.no_grad()
-def infer(params, model, image, label):
+def infer(params, model, image, label, include_flip):
     print(f"\nRunning inference for the model\n -  {params.name}")
     print(f"It was trained with the following hyperparameters:")
     print(f"  - Epochs:        {params.epochs}")
     print(f"  - Batch Size:    {params.batch_size}")
     print(f"  - Learning Rate: {params.learning_rate}\n")
-    print(f"The image you have asked to classify is a {label}.")
+    print(f"The original image you have asked to classify is a {label}. "
+          f"Flipped is {include_flip}")
 
     # Infer label and calculate certainty
     model.eval()
