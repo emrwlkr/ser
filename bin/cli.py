@@ -44,8 +44,7 @@ def train(
     }
 
     # create folder for parameters if it doesn't exist
-    if not os.path.exists(f"ser/results/{name}"):
-        os.makedirs(f"ser/results/{name}")
+    os.makedirs(f"ser/results/{name}", exist_ok=True)
     #save unique txt file for each experiment
     with open(f"ser/results/{name}/parameters.txt", 'w') as f:
         json.dump(params, f)
@@ -57,8 +56,8 @@ def train(
     training_dataloader = get_train_dataloader(batch_size)
     val_dataloader = get_validation_dataloader(batch_size)
 
-    # train model, and save model to pt file, and hieghest accuraacy
-    train_model(name, epochs, learning_rate, device, training_dataloader, val_dataloader, model)
+    # train model, and save model to pt file, and highest accuracy
+    train_model(params, device, training_dataloader, val_dataloader, model)
 
 
 @main.command()
