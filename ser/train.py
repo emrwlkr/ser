@@ -3,17 +3,17 @@ import torch
 from torch import optim
 import torch.nn.functional as F
 
-def train_model(name, epochs, learning_rate, device, train_dataloader, validation_dataloader, model):
+def train_model(params, device, train_dataloader, validation_dataloader, model):
 
     # setup params
-    optimizer = optim.Adam(model.parameters(), lr=learning_rate)
+    optimizer = optim.Adam(model.parameters(), lr=params["learning_rate"])
 
     # record highest validation accuracy
     highest_accuracy = 0
     best_epoch = 0
 
     # train
-    for epoch in range(epochs):
+    for epoch in range(params["epochs"]):
         for i, (images, labels) in enumerate(train_dataloader):
             images, labels = images.to(device), labels.to(device)
             model.train()
@@ -49,6 +49,7 @@ def train_model(name, epochs, learning_rate, device, train_dataloader, validatio
                     highest_accuracy = val_acc
                     best_epoch = epoch
 
+    name = params["name"]
     # save the model
     torch.save(model, f"ser/results/{name}/model.pt")
 
