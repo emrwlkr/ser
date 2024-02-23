@@ -27,7 +27,7 @@ class Net(nn.Module):
         output = F.log_softmax(x, dim=1)
         return output
 
-def get_model():
+def get_model(device):
     
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 

@@ -13,7 +13,6 @@ import typer
 
 main = typer.Typer()
 
-
 @main.command()
 def train(
     name: str = typer.Option(
@@ -32,7 +31,6 @@ def train(
     print(f"Running experiment {name}")
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
-
     # save the parameters!
     params = {
         "name": name,
@@ -48,7 +46,7 @@ def train(
         json.dump(params, f)
 
     # load model
-    model = get_model()
+    model = get_model(device)
 
     # dataloaders
     training_dataloader = get_train_dataloader(batch_size)
