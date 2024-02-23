@@ -2,9 +2,7 @@ from torch.utils.data import DataLoader
 from ser.transforms import transform_data
 from torchvision import datasets
 from pathlib import Path
-
-PROJECT_ROOT = Path(__file__).parent.parent
-DATA_DIR = PROJECT_ROOT / "data"
+from ser.constants import DATA_DIR
 
 def get_train_dataloader(batch_size):
     # dataloaders

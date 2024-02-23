@@ -1,6 +1,7 @@
 from ser.data import get_train_dataloader, get_validation_dataloader
 from ser.model import get_model
 from ser.train import train_model
+from ser.constants import RESULTS_DIR
 
 from pathlib import Path
 import torch
@@ -11,9 +12,6 @@ import os
 import typer
 
 main = typer.Typer()
-
-PROJECT_ROOT = Path(__file__).parent.parent
-DATA_DIR = PROJECT_ROOT / "data"
 
 
 @main.command()
@@ -44,9 +42,9 @@ def train(
     }
 
     # create folder for parameters if it doesn't exist
-    os.makedirs(f"ser/results/{name}", exist_ok=True)
+    os.makedirs(f"{RESULTS_DIR}/{name}", exist_ok=True)
     #save unique txt file for each experiment
-    with open(f"ser/results/{name}/parameters.txt", 'w') as f:
+    with open(f"{RESULTS_DIR}/{name}/parameters.txt", 'w') as f:
         json.dump(params, f)
 
     # load model
