@@ -28,8 +28,6 @@ class Net(nn.Module):
         return output
 
 def get_model(device):
-    
-    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
     # load model
     model = Net().to(device)
